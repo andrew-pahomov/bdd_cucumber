@@ -22,14 +22,18 @@ public class TemplateStepsNew {
         var verificationPage = loginPage.validLogin(DataHelper.getAuthInfo().getLogin(),
                 DataHelper.getAuthInfo().getPassword());
         var dashboardPage = verificationPage.validVerify(DataHelper.getVerificationCode());
-        var actualBalanceFirstCard = Integer.parseInt(dashboardPage.getCardBalance(DataHelper.getFirstCardInfo().getCardNumber()));
-        var actualBalanceSecondCard = Integer.parseInt(dashboardPage.getCardBalance(DataHelper.getSecondCardInfo().getCardNumber()));
+        var actualBalanceFirstCard = Integer.parseInt(dashboardPage.getCardBalance(DataHelper.getFirstCardInfo()
+                .getCardNumber()));
+        var actualBalanceSecondCard = Integer.parseInt(dashboardPage.getCardBalance(DataHelper.getSecondCardInfo()
+                .getCardNumber()));
         var difference = (actualBalanceFirstCard - actualBalanceSecondCard) / 2;
         if (difference > 0) {
-            var transferPage = dashboardPage.selectCardToTransfer(DataHelper.getSecondCardInfo().getCardNumber());
+            var transferPage = dashboardPage.selectCardToTransfer(DataHelper.getSecondCardInfo()
+                    .getCardNumber());
             transferPage.makeTransfer(String.valueOf(difference), DataHelper.getFirstCardInfo().getCardNumber());
         } else {
-            var transferPage = dashboardPage.selectCardToTransfer(DataHelper.getFirstCardInfo().getCardNumber());
+            var transferPage = dashboardPage.selectCardToTransfer(DataHelper.getFirstCardInfo()
+                    .getCardNumber());
             transferPage.makeTransfer(String.valueOf(difference), DataHelper.getSecondCardInfo().getCardNumber());
         }
     }
